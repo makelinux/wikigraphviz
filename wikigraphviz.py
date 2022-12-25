@@ -128,7 +128,7 @@ class CategoryGraphBot(SingleSiteBot):
                            penwidth=round(size / 2, 2),
                            arrowsize=round(size / 4, 2),
                            color=str(round(h, 2)) + ' 1 0.7',
-                           labelfontsize=int(size),
+                           labelfontsize=int(3 * size),
                            labelfontcolor=str(round(h, 2)) + ' 1 0.5')
             return e
 
@@ -156,7 +156,7 @@ class CategoryGraphBot(SingleSiteBot):
             self.fw[e.get_source()].append(e.get_destination())
 
     def run(self) -> None:
-        """Run main function of CategoryGraphBot."""
+        """Main function of CategoryGraphBot."""
         self.scan_level(self.cat, int(self.args.depth))
         # reduce too big graph
         if self.counter > 1000:
