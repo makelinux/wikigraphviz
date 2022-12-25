@@ -17,6 +17,8 @@ optional arguments:
   -style STYLE   graphviz style definitions in dot format:
                  https://graphviz.org/doc/info/attrs.html
   -depth DEPTH   maximal hierarchy depth. 2 by default.
+  -downsize K    font size divider for subcategories. 4 by default.
+                 Use 1 for the same font size.
 
 Examples:
 
@@ -45,6 +47,8 @@ class CategoryGraphBot(SingleSiteBot):
         """Declare arguments."""
         ap.add_argument('--style', nargs='?', default='',
                         help='graphviz style definitions in dot format')
+        ap.add_argument('-downsize', nargs='?', default=4,
+                        help='scaling divider')
         ap.add_argument('--depth', nargs='?', default=2,
                         help='maximal hierarchy depth')
         ap.add_argument('--to', nargs='?', default='',
@@ -96,7 +100,7 @@ class CategoryGraphBot(SingleSiteBot):
 
         """
         title = cat.title(with_ns=False)
-        size = 4 ** level
+        size = float(args.downsize) ** level
         subcats = sorted(cat.subcategories())
 
         def node():
