@@ -1,11 +1,30 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-"""
-Wikipedia graphical visualization.
+r"""
+Visualizes category hierarchy.
 
-Generates graphical representation of Wikipedia
-category hierarchy in formats dot svg and html5.
+Generates graphical representation in formats dot, svg and html5
+of category hierarchy.
+
+usage: pwb.py graph [-style STYLE] [-depth DEPTH] [-from FROM] [-to TO]
+
+actions:
+  -from [FROM]   Category name to scan, default is main category, "?" to ask.
+
+optional arguments:
+  -to TO         base file name to save, "?" to ask.
+  -style STYLE   graphviz style definitions in dot format:
+                 https://graphviz.org/doc/info/attrs.html
+  -depth DEPTH   maximal hierarchy depth. 2 by default.
+
+Examples:
+
+pwb.py -v category_graph -from
+pwb.py category_graph -from Life -downsize 1.5 \
+        -style 'graph[rankdir=BT ranksep=0.5] node[shape=circle
+        style=filled fillcolor=green] edge[style=dashed penwidth=3]'
+
 """
 
 import argparse
@@ -16,7 +35,6 @@ import pydot
 import pywikibot
 from pywikibot import config
 from pywikibot.bot import SingleSiteBot
-
 
 class CategoryGraphBot(SingleSiteBot):
     """Bot to create graph of the category structure."""
