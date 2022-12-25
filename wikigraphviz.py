@@ -112,8 +112,7 @@ class CategoryGraphBot(SingleSiteBot):
                            label=r'"{}\n{} C"'.
                            format(title, len(subcats)),
                            tooltip=title + '\n\n' + subs,
-                           URL='https://' + self.site.code
-                           + '.wikipedia.org/wiki/' + cat.title(as_url=True),
+                           URL=cat.full_url(),
                            fontsize=int(10 * size))
             return n
 
